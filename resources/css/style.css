@@ -1,0 +1,168 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,h2,h3 {
+	text-align:center;
+}
+
+#sign-up button, #event-creation button {
+	  background-color: #4CAF50;
+	  border: none;
+	  color: white;
+	  padding: 15px 32px;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-size: 16px;
+	  border-radius: 4px;
+	  transition-duration: 0.4s;
+}
+
+#sign-up button:hover, #event-creation button:hover {
+  background-color: #68de6d;
+  color: white;
+}
+
+h3 {
+	background-color: #a5d4a5;
+	width: 100%;
+	color: white;
+	padding: 10px;
+	margin-top: 100px;
+}
+
+div.buttonD {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.error {color: #FF0000;}
+
+.grid-item {
+  padding: 20px;
+  font-size: 16px;
+  text-align: center;
+  margin: 10px;
+  border:inset;
+  background-color: #f2fcf2;
+}
+
+#sign-up input, #event-creation input {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
+#sign-up  input[type=submit], #event-creation input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#sign-up input[type=submit]:hover, #event-creation input[type=submit]:hover, #call-to-action-button:hover {
+  background-color: #45a049;
+}
+
+#sign-up form, #event-creation form {
+	background: #dfebdf;
+	text-align: center;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#call-to-action{
+	height: 400px;
+	/* background-color: #e6fae6; */
+	background-image: url("https://cdn.discordapp.com/attachments/754364563041812522/863079779749986324/home_image.jpg");
+	text-align: center;
+	color: white;
+}
+
+#header-button{
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: right;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 4px;
+	transition-duration: 0.4s;
+}
+
+#sign-up-form, #event-form {
+	background-color: #e6fae6;
+	text-align: center;
+	color: black;
+}
+
+#call-to-action h2 {
+	padding-top: 200px;
+}
+
+#testimonials {
+	justify-content: center;
+}
+
+#call-to-action-button {
+	background-color: #66bd66;
+	padding: 14px 30px;
+	border: none;
+	color: white;
+}
+
+#sign-up-form h2 , #event-form h2 {
+	padding-top:50px;
+}
+
+#sign-up-form input , #event-form input {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#sign-up-form input[type=submit] , #event-form input[type=submit] {
+	margin-top: 50px;
+}
+
+
+.material-icons {
+	margin-top: 100px;
+	text-align:center;
+	display: inline-block;
+	width: 100%;
+	font-size: 56px;
+	color: #a5d4a5;
+}
+
+h1 {
+	margin-left: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
