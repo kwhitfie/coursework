@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,24 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/create-event', function () {
-    return view('create-event');
-});
 
-Route::post('/signup', function () {
-    return view('signup');
-});
+
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/events', function () {
-    return view('events');
+    return view('home');
 });
 
 
 
 Route::get('/list', 'App\Http\Controllers\EventsController@list');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('events','App\Http\Controllers\EventController')->name('events',"create");
+
+
 
 ?>

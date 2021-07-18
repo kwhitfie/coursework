@@ -16,12 +16,15 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('event_name');
+            $table->string('name');
             $table->string('description');
             $table->string('location');
-            $table->string('event_type');
+            $table->string('type');
             $table->datetime('start_time');
             $table->datetime('end_time');
+            $table->string('image', 256)->nullable();
+            $table->bigInteger('userid')->unsigned();
+            $table->foreign('userid')->references('id')->on('users');
         }
       );
 
@@ -62,24 +65,26 @@ class CreateEventsTable extends Migration
         DB::table('events')->insert(
           array(
             'id' => 1,
-            'event_name' => "Football club",
+            'name' => "Football club",
             'description' => "Footie with the lads",
             'location' => "Campus Gym",
-            'event_type' => "Sport",
+            'type' => "Sport",
             'start_time' => '2020-07-09',
-            'end_time' => '2020-07-09'
+            'end_time' => '2020-07-09',
+            'userid' => 2,
           )
         );
 
         DB::table('events')->insert(
           array(
             'id' => 2,
-            'event_name' => "Biology Study",
+            'name' => "Biology Study",
             'description' => "Quick run through of unit 3",
             'location' => "Library",
-            'event_type' => "Others",
+            'type' => "Others",
             'start_time' => '2020-07-10',
-            'end_time' => '2020-07-10'
+            'end_time' => '2020-07-10',
+            'userid' => 2,
           )
         );
     }
