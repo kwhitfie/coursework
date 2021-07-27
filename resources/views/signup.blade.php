@@ -12,6 +12,13 @@
       			include(CSS_PATH);
       		?>
     	</style>
+
+			<script>
+		    if(typeof window.history.pushState == 'function') {
+		        window.history.pushState({}, "Hide", "http://localhost/join/prog/ex.php");
+		    }
+		</script>
+
 </head>
 
 <body>
@@ -25,74 +32,77 @@
 			 $forename = $surname = $email1 = $email2 = $password1 = $password2 = $accounttype= "";
 			 $forenameErr = $surnameErr = $email1Err = $email2Err = $password1Err = $password2Err = "";
 
-			 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-			 if (empty($_POST["forename"])) {
+			 if (empty($_GET["forename"])) {
 				 $forenameErr = "Forename is required";
 			 }
 			 else {
-				 $forename = test_input($_POST["forename"]);
+				 $forename = test_input($_GET["forename"]);
 				 if (!preg_match("/^[a-zA-Z-' ]*$/",$forename)) {
 					 $forenameErr = "Only letters and white space allowed";
 				 }
-			 }
-
-			 if (empty($_POST["surname"])) {
-				 $surnameErr = "Surname is required";
-			 }
-			 else {
-				 $surname = test_input($_POST["surname"]);
-				 if (!preg_match("/^[a-zA-Z-' ]*$/",$surname)) {
-					 $surnameErr = "Only letters and white space allowed";
+				 else {
+					 $forenameErr = "";
 				 }
 			 }
 
-			 if (empty($_POST["email1"])) {
+			 if (empty($_GET["surname"])) {
+				 $surnameErr = "Surname is required";
+			 }
+			 else {
+				 $surname = test_input($_GET["surname"]);
+				 if (!preg_match("/^[a-zA-Z-' ]*$/",$surname)) {
+					 $surnameErr = "Only letters and white space allowed";
+				 }
+				 else {
+					 $surnameErr = "";
+				 }
+			 }
+
+			 if (empty($_GET["email1"])) {
 				 $email1Err = "Email is required";
 			 }
 			 else {
-				 $email1 = test_input($_POST["email1"]);
+				 $email1 = test_input($_GET["email1"]);
+				 $email1Err = "";
 			 }
 
-			 if (empty($_POST["email2"])) {
+			 if (empty($_GET["email2"])) {
 				 $email2Err = "Verification email is required";
 			 }
 			 else {
-				 $email2 = test_input($_POST["email2"]);
+				 $email2 = test_input($_GET["email2"]);
+				 $email2Err = "";
 			 }
 
-			 if (empty($_POST["password1"])) {
+			 if (empty($_GET["password1"])) {
 				 $password1Err = "Password is required";
 			 }
 			 else {
-				 $password1 = test_input($_POST["password1"]);
+				 $password1 = test_input($_GET["password1"]);
+				 $password1Err = "";
 			 }
 
-			 if (empty($_POST["password2"])) {
+			 if (empty($_GET["password2"])) {
 				 $password2Err = "Verification password is required";
 			 }
 			 else {
-				 $password2 = test_input($_POST["password2"]);
+				 $password2 = test_input($_GET["password2"]);
+				 $password2Err = "";
 			 }
 		 }
 
 
 			 if($email1 != $email2) {
-				 echo "<script>
-					 function emailAlert()
-					 {
-					 alert('Emails do not match');
-					 }
-					 </script>";	}
+				 $email2Err = "Emails must match";
+				 	}
+
 
 
 			 if($password1 != $password2) {
-				 echo "<script>
-					 function passwordAlert()
-					 {
-					 alert('Passwords do not match');
-					 }
-					 </script>";	}
+				 $password2Err = "Passwords must match";
+			 	}
 
 
 		 function test_input($data) {
@@ -105,9 +115,8 @@
 
 	<section id="sign-up-form">
 		<h2>Sign up for free</h2>
-		<form id="sign-up" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+		<form id="sign-up" method="get" action="{{ url('signup') }}">
 			@csrf
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div>
 				<input type="forename" name="forename" value="<?php echo $forename;?>" placeholder="Forename" required  />
 				<span class="error">* <?php echo $forenameErr;?></span>
