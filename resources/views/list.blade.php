@@ -21,7 +21,6 @@
             <th> Event Type </th>
             <th> Start Time </th>
             <th> End Time </th>
-            <th> Image </th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +33,7 @@
               <td> {{$event->type}} </td>
               <td> {{$event->start_time}} </td>
               <td> {{$event->end_time}} </td>
-              <td> {{$event->image}} </td>
+              <td><a href="{{action('App\Http\Controllers\EventController@show', $event['id'])}}" class="btn btn- primary">Details</a></td>
             </tr>
             @endforeach
           </tbody>

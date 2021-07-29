@@ -14,8 +14,8 @@ class EventController extends Controller
      */
     public function index()
     {
-      $event = Events::all()->toArray();
-        return view('events', compact('event'));
+      $events = Events::all()->toArray();
+        return view('list', compact('events'));
     }
 
     /**
@@ -87,7 +87,8 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+      $event = Events::find($id);
+      return view('show',compact('event'));
     }
 
     /**
@@ -98,7 +99,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+      $event = Events::find($id);
+      return view('edit',compact('event'));
     }
 
     /**
@@ -110,7 +112,43 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $event = Events::find($id);
+      $this->validate(request(), [
+      'name' => 'required',
+      'description' => 'required',
+      'location' => 'required',
+      'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
+      'type' => 'required',
+      'start_time' => 'required',
+      'end_time' => 'required',
+      ]);
+      $event->name = $request->input('name');
+      $event->description = $request->input('description');
+      $event->location = $request->input('location');
+      $event->image = $fileNameToStore;
+      $event->type = $request->input('type');
+      $event->start_time = $request->input('start_time');
+      $event->end_time = $request->input('end_time');
+      $userid = auth()->user()->id;
+      $event->userid = $userid;
+      //Handles the uploading of the image
+      if ($request->hasFile('image')){
+      //Gets the filename with the extension
+      $fileNameWithExt = $request->file('image')->getClientOriginalName();
+      //just gets the filename
+      $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+      //Just gets the extension
+      $extension = $request->file('image')->getClientOriginalExtension();
+      //Gets the filename to store
+      $fileNameToStore = $filename.'_'.time().'.'.$extension;
+      //Uploads the image
+      $path = $request->file('image')->storeAs('public/images', $fileNameToStore);
+      } else {
+      $fileNameToStore = 'noimage.jpg';
+      }
+      $event->image = $fileNameToStore;
+      $event->save();
+      return redirect('list')->with('success','Event has been updated');
     }
 
     /**
@@ -121,6 +159,8 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $event = Events::find($id);
+      $event->delete();
+      return redirect('list')->with('success','Event has been deleted');
     }
 }

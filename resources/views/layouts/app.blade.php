@@ -37,7 +37,7 @@
                       @guest
                       @else
                           <li class="nav-item">
-                              <a class="nav-link" href="{{ route('events.index') }}">{{ __('Create Event') }}</a>
+                              <a class="nav-link" href="{{ route('events.create') }}">{{ __('Create Event') }}</a>
                           </li>
                       <li class="nav-item">
                       <a class="nav-link" href="/list">List Events </a>
