@@ -36,9 +36,12 @@
 
                       @guest
                       @else
-                          <li class="nav-item">
-                              <a class="nav-link" href="{{ route('events.create') }}">{{ __('Create Event') }}</a>
-                          </li>
+                      @if(Auth::check() && Auth::user()->account_type == 1)
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('events.create') }}">{{ __('Create Event') }}</a>
+                      </li>
+                        @endif
+
                       <li class="nav-item">
                       <a class="nav-link" href="/list">List Events </a>
                       </li>

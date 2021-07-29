@@ -29,6 +29,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('events','App\Http\Controllers\EventController')->name('events',"create");
+//Route::get('add', 'App\Http\Controllers\EventController@add')->name('events','add');
+Route::get('add/{id}', ['as' => 'event.add', 'uses' => 'App\Http\Controllers\EventController@add']);
 
 
 

@@ -25,42 +25,10 @@ class CreateEventsTable extends Migration
             $table->string('image', 256)->nullable();
             $table->bigInteger('userid')->unsigned();
             $table->foreign('userid')->references('id')->on('users');
+            $table->bigInteger('interest')->default(0);
         }
       );
 
-    //   Schema::table('accounts', function (Blueprint $table) {
-    //       $table->foreign('id');
-    //       $table->timestamps();
-    //       $table->string('forename');
-    //       $table->string('surname');
-    //       $table->string('email');
-    //       $table->string('password');
-    //       $table->string('account_type');
-    //   }
-    // );
-    //
-    //
-    //     DB::table('accounts')->insert(
-    //         array(
-    //           'id' => 1,
-    //           'forename' => "Vadim",
-    //           'surname' => "Taranenko",
-    //           'email' => "vadim@aston.ac.uk",
-    //           'password' => "Ukraine123",
-    //           'account_type' => "Student",
-    //           )
-    //         );
-    //
-    //         DB::table('accounts')->insert(
-    //             array(
-    //               'id' => 1,
-    //               'forename' => "Kayley",
-    //               'surname' => "Whitfield",
-    //               'email' => "admin@aston.ac.uk",
-    //               'password' => "admin",
-    //               'account_type' => "Organiser",
-    //               )
-    //             );
 
         DB::table('events')->insert(
           array(
@@ -72,6 +40,7 @@ class CreateEventsTable extends Migration
             'start_time' => '2020-07-09',
             'end_time' => '2020-07-09',
             'userid' => 2,
+            'image' => 'football.jpg',
           )
         );
 
@@ -85,6 +54,7 @@ class CreateEventsTable extends Migration
             'start_time' => '2020-07-10',
             'end_time' => '2020-07-10',
             'userid' => 2,
+            'image' => 'flask.jpg',
           )
         );
     }

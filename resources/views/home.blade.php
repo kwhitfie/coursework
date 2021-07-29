@@ -23,7 +23,7 @@
                 </div>
                 </div>
                 <br></br>
-                @guest
+                @if(Auth::check() && Auth::user()->account_type == 0)
                 <div class="card">
                 <div class="card-header">{{ __('Become an organiser') }}</div>
                 <div class="card-body">
@@ -32,7 +32,7 @@
                   <button type="button">{{ __('Submit') }}</button>
                 </div>
               </div>
-                @endguest
+                @endif
 
 
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Events;
+use App\Models\User;
 
 class EventController extends Controller
 {
@@ -88,7 +89,8 @@ class EventController extends Controller
     public function show($id)
     {
       $event = Events::find($id);
-      return view('show',compact('event'));
+      $user = User::find($event->userid);
+      return view('show',compact('event','user'));
     }
 
     /**
@@ -162,5 +164,23 @@ class EventController extends Controller
       $event = Events::find($id);
       $event->delete();
       return redirect('list')->with('success','Event has been deleted');
+    }
+
+    public function user()
+    {
+      return $this->belongsTo(User :: class, 'userid');
+    }
+
+    /**
+     * Add interest
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function add($id) {
+      $event = Events::find($id);
+      $event->interest += 1;
+      $event->save();
+      return redirect('/list')->with('success', 'Interest logged');
     }
 }
