@@ -26,10 +26,10 @@
                 @if(Auth::check() && Auth::user()->account_type == 0)
                 <div class="card">
                 <div class="card-header">{{ __('Become an organiser') }}</div>
-                <div class="card-body">
+                <div class="card-body text-center">
                   {{ __('Click below to register to become an event organiser') }}
                   <br></br>
-                  <button type="button">{{ __('Submit') }}</button>
+                  <a role="button" class="btn btn-info" href="{{action('App\Http\Controllers\EventController@becomeOrganiser')}}">{{ __('Submit') }}</a>
                 </div>
               </div>
                 @endif

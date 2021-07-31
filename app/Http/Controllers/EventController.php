@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Events;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -119,20 +120,13 @@ class EventController extends Controller
       'name' => 'required',
       'description' => 'required',
       'location' => 'required',
-      'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:500',
-      'type' => 'required',
-      'start_time' => 'required',
-      'end_time' => 'required',
       ]);
       $event->name = $request->input('name');
       $event->description = $request->input('description');
       $event->location = $request->input('location');
-      $event->image = $fileNameToStore;
       $event->type = $request->input('type');
       $event->start_time = $request->input('start_time');
       $event->end_time = $request->input('end_time');
-      $userid = auth()->user()->id;
-      $event->userid = $userid;
       //Handles the uploading of the image
       if ($request->hasFile('image')){
       //Gets the filename with the extension
@@ -182,5 +176,16 @@ class EventController extends Controller
       $event->interest += 1;
       $event->save();
       return redirect('/list')->with('success', 'Interest logged');
+    }
+
+    /**
+     * @return \Illuminate\Http\Response
+     */
+
+    public function becomeOrganiser() {
+      $user = Auth::user();
+      $user->account_type = 1;
+      $user->save();
+      return redirect('/')->with('success', 'You are now an event organiser');
     }
 }
